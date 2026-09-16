@@ -2,8 +2,8 @@
 
 ## Thông tin bài nộp
 
-- Tên nhóm: Nguyễn Hoàng Tuyền Team
-- Người đại diện / MSSV: Nguyễn Hoàng Tuyền / 2A202602439
+- Tên nhóm: Nguyễn Hoàng Tuyên Team
+- Người đại diện / MSSV: Nguyễn Hoàng Tuyên / 2A202602439
 - Tên repo: `K4-L3-DAY04-NguyenHoangTuyen-2A202602439-PromptEngineeringToolCalling`
 - URL repo, nhánh nộp, commit chốt: `https://github.com/Tuyen2k47/K4-L3-DAY04-NguyenHoangTuyen-2A202602439-PromptEngineeringToolCalling`
 - Deadline áp dụng: 23:59 ngày học (UTC+07:00)
@@ -12,7 +12,7 @@
 
 | Họ và tên | MSSV | GitHub | Vai trò và công việc | File/commit/PR |
 |---|---|---|---|---|
-| Nguyễn Hoàng Tuyền | 2A202602439 | Tuyen2k47 | Trưởng nhóm, Prompt Engineering, Setup Ollama & OpenRouter, Viết Report | `artifacts/system_prompt.md`, `artifacts/REPORT.md` |
+| Nguyễn Hoàng Tuyên | 2A202602439 | Tuyen2k47 | Trưởng nhóm, Prompt Engineering, Setup Ollama & OpenRouter, Viết Report | `artifacts/system_prompt.md`, `artifacts/REPORT.md` |
 
 ## Nhận xét chung
 
@@ -23,7 +23,7 @@
 
 ## INDIVIDUAL
 
-### Nguyễn Hoàng Tuyền — 2A202602439
+### Nguyễn Hoàng Tuyên — 2A202602439
 
 - Phần việc và file/commit/PR: Toàn bộ quá trình phân tích v0, tối ưu `system_prompt.md`, viết 10 case test nhóm `data/eval_group.json`, cấu hình Ollama local và hoàn thiện báo cáo `artifacts/REPORT.md`.
 - Quyết định, khó khăn và cách xử lý: Xử lý sự cố Rate Limit API (429) bằng cách thiết lập Ollama local `llama3.1` trên ổ E và tích hợp cơ chế Smart Fallback trong script đánh giá.
