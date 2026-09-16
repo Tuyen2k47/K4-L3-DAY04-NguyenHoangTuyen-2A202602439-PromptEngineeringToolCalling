@@ -23,7 +23,7 @@
 
 ## INDIVIDUAL
 
-### Nguyễn Hoàng Tuyên — 2A202602439
+### Nguyễn Hoàng Tuyên — 2A202602439 
 
 - Phần việc và file/commit/PR: Toàn bộ quá trình phân tích v0, tối ưu `system_prompt.md`, viết 10 case test nhóm `data/eval_group.json`, cấu hình Ollama local và hoàn thiện báo cáo `artifacts/REPORT.md`.
 - Quyết định, khó khăn và cách xử lý: Xử lý sự cố Rate Limit API (429) bằng cách thiết lập Ollama local `llama3.1` trên ổ E và tích hợp cơ chế Smart Fallback trong script đánh giá.
