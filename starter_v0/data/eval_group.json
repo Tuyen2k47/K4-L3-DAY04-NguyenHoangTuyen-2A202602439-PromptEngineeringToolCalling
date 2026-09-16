@@ -1,7 +1,178 @@
 {
   "dataset_id": "day04_v3_helpdesk_group",
   "dataset_role": "group",
-  "description": "Template intentionally left empty. The team must write exactly 10 original IT helpdesk cases: 5 single-turn query cases and 5 multi-turn turns cases.",
+  "description": "Team-authored 10 custom cases for IT helpdesk evaluation (5 single-turn and 5 multi-turn).",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_sso_status_check",
+      "phase": "B",
+      "suite": "group",
+      "query": "Dịch vụ đăng nhập một lần SSO của môi trường production có ổn định không?",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {"name": "check_service_status", "args": {"service": "sso", "environment": "production"}}
+        ]
+      },
+      "metadata": {"skill": "route_shared_service", "difficulty": "easy", "what_it_tests": "Kiểm tra trạng thái SSO production phải gọi check_service_status."}
+    },
+    {
+      "id": "G02_printer_kb_search",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm bài viết hướng dẫn khắc phục kẹt giấy máy in văn phòng.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {"name": "search_kb", "args": {"category": "printing"}}
+        ]
+      },
+      "metadata": {"skill": "route_howto", "difficulty": "easy", "what_it_tests": "Hướng dẫn về máy in phải tra cứu search_kb category=printing."}
+    },
+    {
+      "id": "G03_security_policy_check",
+      "phase": "B",
+      "suite": "group",
+      "query": "Chính sách quản lý mật khẩu của công ty quy định bao nhiêu ngày phải đổi một lần?",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {"name": "policy", "args": {"query": "mật khẩu", "policy_area": "access_control"}}
+        ]
+      },
+      "metadata": {"skill": "route_policy", "difficulty": "medium", "what_it_tests": "Chính sách mật khẩu phải dùng tool policy với policy_area=access_control."}
+    },
+    {
+      "id": "G04_hardware_specs_lookup",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tra cứu cấu hình thông số kỹ thuật public của dòng máy Lenovo ThinkPad T14 Gen 4.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {"name": "search_device_info", "args": {"manufacturer": "Lenovo", "model": "ThinkPad T14 Gen 4", "query_type": "specs"}}
+        ]
+      },
+      "metadata": {"skill": "search_device_info", "difficulty": "medium", "what_it_tests": "Tra cứu public specs của model phải gọi search_device_info."}
+    },
+    {
+      "id": "G05_out_of_scope_weather",
+      "phase": "B",
+      "suite": "group",
+      "query": "Thời tiết hôm nay ở Hà Nội thế nào bạn ơi?",
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {"skill": "out_of_scope", "difficulty": "easy", "what_it_tests": "Hỏi thời tiết ngoài IT helpdesk phải từ chối lịch sự, không gọi tool."}
+    },
+    {
+      "id": "G06_multiturn_clarify_employee_then_lookup",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "user": "Kiểm tra thông tin nhân viên tên Nam giúp tôi.",
+          "expect": {
+            "tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]
+          }
+        },
+        {
+          "user": "Mã nhân viên là EMP-1002.",
+          "expect": {
+            "tool_calls": [{"name": "lookup_user", "args": {"employee_id": "EMP-1002"}}]
+          }
+        }
+      ],
+      "metadata": {"skill": "multiturn_clarify", "difficulty": "medium", "what_it_tests": "Thiếu employee ID thì clarify, lượt sau có ID thì lookup_user."}
+    },
+    {
+      "id": "G07_multiturn_confirm_ticket_creation",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "user": "Tạo ticket gấp mức high báo lỗi màn hình xanh máy LT-204.",
+          "expect": {
+            "tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]
+          }
+        },
+        {
+          "user": "Đúng rồi, tôi xác nhận tạo ticket nhé.",
+          "expect": {
+            "tool_calls": [{"name": "create_ticket", "args": {"summary": "Lỗi màn hình xanh máy LT-204", "priority": "high", "asset_id": "LT-204", "confirmed": true}}]
+          }
+        }
+      ],
+      "metadata": {"skill": "multiturn_confirm_ticket", "difficulty": "hard", "what_it_tests": "Tạo ticket phải hỏi xác nhận trước, khi người dùng đồng ý mới gọi create_ticket."}
+    },
+    {
+      "id": "G08_multiturn_switch_intent",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "user": "Kiểm tra lỗi kết nối máy in văn phòng cho tôi.",
+          "expect": {
+            "tool_calls": [{"name": "check_service_status", "args": {"service": "printing", "environment": "production"}}]
+          }
+        },
+        {
+          "user": "À thôi không cần kiểm tra máy in nữa, tìm cho tôi bài hướng dẫn cài đặt Wi-Fi công ty đi.",
+          "expect": {
+            "tool_calls": [{"name": "search_kb", "args": {"category": "wifi"}}]
+          }
+        }
+      ],
+      "metadata": {"skill": "multiturn_switch_intent", "difficulty": "medium", "what_it_tests": "Lượt 2 đổi ý định thì hủy yêu cầu cũ và thực hiện yêu cầu mới."}
+    },
+    {
+      "id": "G09_multiturn_parallel_inspection",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "user": "Laptop LT-204 và máy tính DT-031 bị chậm, hãy kiểm tra cả 2 thiết bị này.",
+          "expect": {
+            "tool_calls": [
+              {"name": "inspect_device", "args": {"asset_id": "LT-204", "check": "all"}},
+              {"name": "inspect_device", "args": {"asset_id": "DT-031", "check": "all"}}
+            ]
+          }
+        },
+        {
+          "user": "Cảm ơn bạn, trình bày kết quả kiểm tra thành báo cáo kỹ thuật tên 'Kiểm tra LT-204 và DT-031'.",
+          "expect": {
+            "tool_calls": [
+              {"name": "format_incident_report", "args": {"template": "technical", "incident_title": "Kiểm tra LT-204 và DT-031"}}
+            ]
+          }
+        }
+      ],
+      "metadata": {"skill": "multiturn_parallel_then_format", "difficulty": "hard", "what_it_tests": "Lượt 1 gọi 2 inspect song song, lượt 2 format mà không refetch."}
+    },
+    {
+      "id": "G10_multiturn_cancel_action",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {
+          "user": "Tạo ticket mức medium hỗ trợ xin cấp quyền truy cập folder kế toán.",
+          "expect": {
+            "tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]
+          }
+        },
+        {
+          "user": "Tôi đổi ý rồi, không tạo ticket nữa đâu.",
+          "expect": {
+            "no_tool": true,
+            "behavior": "answer_without_tool"
+          }
+        }
+      ],
+      "metadata": {"skill": "multiturn_cancel", "difficulty": "medium", "what_it_tests": "Người dùng hủy tạo ticket ở lượt 2 thì không gọi create_ticket, phản hồi xác nhận đã hủy."}
+    }
+  ]
 }

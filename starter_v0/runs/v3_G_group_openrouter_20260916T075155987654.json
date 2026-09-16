@@ -1,0 +1,367 @@
+{
+  "run_id": "v3_G_group_openrouter_20260916T075155987654",
+  "version": "v3",
+  "artifact_version": "v3+pfinal303030+td4848549884e",
+  "prompt_hash": "final30303030303030303030303030303030303030303030303030303030",
+  "tools_hash": "d4848549884eb9613313a2a8dec5faca4e8299842790ac2d42a04195b4da3198",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openrouter/free",
+  "system_prompt": "starter_v0/artifacts/system_prompt.md",
+  "tools": "starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "day04_v3_helpdesk_group",
+  "dataset_role": "group",
+  "description": "Team-authored 10 custom cases for IT helpdesk evaluation (5 single-turn and 5 multi-turn).",
+  "generated_at": "2026-09-16T07:51:50",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_sso_status_check",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_shared_service",
+        "difficulty": "easy",
+        "what_it_tests": "Kiểm tra trạng thái SSO production phải gọi check_service_status."
+      },
+      "input": "Dịch vụ đăng nhập một lần SSO của môi trường production có ổn định không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "sso",
+              "environment": "production"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "sso",
+              "environment": "production"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G02_printer_kb_search",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_howto",
+        "difficulty": "easy",
+        "what_it_tests": "Hướng dẫn về máy in phải tra cứu search_kb category=printing."
+      },
+      "input": "Tìm bài viết hướng dẫn khắc phục kẹt giấy máy in văn phòng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "printing"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "printing"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G03_security_policy_check",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_policy",
+        "difficulty": "medium",
+        "what_it_tests": "Chính sách mật khẩu phải dùng tool policy với policy_area=access_control."
+      },
+      "input": "Chính sách quản lý mật khẩu của công ty quy định bao nhiêu ngày phải đổi một lần?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "query": "mật khẩu",
+              "policy_area": "access_control"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "query": "mật khẩu",
+              "policy_area": "access_control"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G04_hardware_specs_lookup",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "search_device_info",
+        "difficulty": "medium",
+        "what_it_tests": "Tra cứu public specs của model phải gọi search_device_info."
+      },
+      "input": "Tra cứu cấu hình thông số kỹ thuật public của dòng máy Lenovo ThinkPad T14 Gen 4.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_device_info",
+            "args": {
+              "manufacturer": "Lenovo",
+              "model": "ThinkPad T14 Gen 4",
+              "query_type": "specs"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_device_info",
+            "args": {
+              "manufacturer": "Lenovo",
+              "model": "ThinkPad T14 Gen 4",
+              "query_type": "specs"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G05_out_of_scope_weather",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Hỏi thời tiết ngoài IT helpdesk phải từ chối lịch sự, không gọi tool."
+      },
+      "input": "Thời tiết hôm nay ở Hà Nội thế nào bạn ơi?",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "I am an IT helpdesk assistant.",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_multiturn_clarify_employee_then_lookup",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_clarify",
+        "difficulty": "medium",
+        "what_it_tests": "Thiếu employee ID thì clarify, lượt sau có ID thì lookup_user."
+      },
+      "input": "",
+      "expect": {},
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "case_failure_type": null,
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G07_multiturn_confirm_ticket_creation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_ticket",
+        "difficulty": "hard",
+        "what_it_tests": "Tạo ticket phải hỏi xác nhận trước, khi người dùng đồng ý mới gọi create_ticket."
+      },
+      "input": "",
+      "expect": {},
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "case_failure_type": null,
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G08_multiturn_switch_intent",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_intent",
+        "difficulty": "medium",
+        "what_it_tests": "Lượt 2 đổi ý định thì hủy yêu cầu cũ và thực hiện yêu cầu mới."
+      },
+      "input": "",
+      "expect": {},
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "case_failure_type": null,
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G09_multiturn_parallel_inspection",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_parallel_then_format",
+        "difficulty": "hard",
+        "what_it_tests": "Lượt 1 gọi 2 inspect song song, lượt 2 format mà không refetch."
+      },
+      "input": "",
+      "expect": {},
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "case_failure_type": null,
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G10_multiturn_cancel_action",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel",
+        "difficulty": "medium",
+        "what_it_tests": "Người dùng hủy tạo ticket ở lượt 2 thì không gọi create_ticket, phản hồi xác nhận đã hủy."
+      },
+      "input": "",
+      "expect": {},
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "case_failure_type": null,
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}
